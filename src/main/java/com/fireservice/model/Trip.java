@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "books")
+@Table(name = "trips")  // Обновил имя таблицы
 public class Trip {
 
     @Id
@@ -16,20 +16,20 @@ public class Trip {
     @Column(nullable = false)
     private String title;
 
-    private String author;
+    private String conductor;          // заменил author → conductor
 
     private BigDecimal price;
 
     private String category;
 
-    @Column(nullable = false)
-    private int stock;
+    @Column(name = "seats_available", nullable = false)
+    private int seatsAvailable;        // заменил stock → seatsAvailable
 
     @ManyToMany
     @JoinTable(
-            name = "book_store",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "store_id")
+            name = "trip_station",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
     )
     private Set<Station> stations = new HashSet<>();
 
@@ -51,12 +51,12 @@ public class Trip {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getConductor() {
+        return conductor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
     }
 
     public BigDecimal getPrice() {
@@ -75,19 +75,19 @@ public class Trip {
         this.category = category;
     }
 
-    public int getStock() {
-        return stock;
+    public int getSeatsAvailable() {
+        return seatsAvailable;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setSeatsAvailable(int seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
     }
 
-    public Set<Station> getStores() {
+    public Set<Station> getStations() {
         return stations;
     }
 
-    public void setStores(Set<Station> stations) {
+    public void setStations(Set<Station> stations) {
         this.stations = stations;
     }
 }

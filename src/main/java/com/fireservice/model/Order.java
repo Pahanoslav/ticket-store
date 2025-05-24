@@ -44,11 +44,11 @@ public class Order {
         this.user = user;
     }
 
-    public Trip getBook() {
+    public Trip getTrip() {
         return trip;
     }
 
-    public void setBook(Trip trip) {
+    public void setTrip(Trip trip) {
         this.trip = trip;
     }
 
@@ -79,6 +79,11 @@ public class Order {
     @Transient
     private String orderDateString;
 
-    public String getOrderDateString() { return orderDateString; }
-    public void setOrderDateString(String s) { this.orderDateString = s; }
+    public String getOrderDateString() {
+        return orderDateString;
+    }
+
+    public void setOrderDateString(String orderDateString) {
+        this.orderDateString = orderDateString;
+    }
 }
