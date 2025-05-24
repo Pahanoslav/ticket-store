@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Главная - Книжный магазин</title>
+    <title>Главная - Система ЖД билетов</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <style>
         /* Основной стиль страницы */
@@ -60,18 +60,18 @@
 <body>
 
 <header>
-    <h1>Добро пожаловать в Книжный магазин</h1>
+    <h1>Добро пожаловать в Систему ЖД билетов</h1>
     <nav>
-        <a th:href="@{/trips}">Книги</a> |
-        <a th:href="@{/stations}">Магазины</a> |
-        <a th:href="@{/orders}">Заказы</a> |
+        <a th:href="@{/trips}">Поездки</a> |
+        <a th:href="@{/stations}">Станции</a> |
+        <a th:href="@{/tickets}">Билеты</a> |
         <a th:href="@{/about}">О сайте</a> |
         <a th:href="@{/login}">Вход</a>
     </nav>
 </header>
 
 <main>
-    <p>Здесь вы можете просматривать и заказывать книги, регистрироваться и пользоваться личным кабинетом.</p>
+    <p>Здесь вы можете просматривать поездки, покупать билеты, регистрироваться и пользоваться личным кабинетом.</p>
 </main>
 
 </body>

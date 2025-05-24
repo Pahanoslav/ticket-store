@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Редактировать заказ</title>
+    <title>Редактировать билет</title>
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<h2>Редактировать заказ</h2>
-<form th:action="@{|/orders/edit/${order.id}|}" th:object="${order}" method="post">
+<h2>Редактировать билет</h2>
+<form th:action="@{|/tickets/edit/${ticket.id}|}" th:object="${ticket}" method="post">
     <div>
         <label>Пользователь:</label>
         <select th:field="*{user.id}">
-            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${user.id == order.user.id}"></option>
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${user.id == ticket.user.id}"></option>
         </select>
     </div>
     <div>
-        <label>Книга:</label>
+        <label>Поездка:</label>
         <select th:field="*{trip.id}">
-            <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.title}" th:selected="${trip.id == order.trip.id}"></option>
+            <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.title}" th:selected="${trip.id == ticket.trip.id}"></option>
         </select>
     </div>
     <div>
@@ -27,14 +27,14 @@
     <div>
         <label>Статус:</label>
         <select th:field="*{status}">
-            <option value="PENDING" th:selected="${order.status == 'PENDING'}">Ожидает</option>
-            <option value="APPROVED" th:selected="${order.status == 'APPROVED'}">Подтвержден</option>
-            <option value="REJECTED" th:selected="${order.status == 'REJECTED'}">Отклонен</option>
-            <option value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Отменен</option>
+            <option value="PENDING" th:selected="${ticket.status == 'PENDING'}">Ожидает</option>
+            <option value="APPROVED" th:selected="${ticket.status == 'APPROVED'}">Подтвержден</option>
+            <option value="REJECTED" th:selected="${ticket.status == 'REJECTED'}">Отклонен</option>
+            <option value="CANCELLED" th:selected="${ticket.status == 'CANCELLED'}">Отменен</option>
         </select>
     </div>
     <button type="submit">Обновить</button>
 </form>
-<a th:href="@{/orders}">Назад к списку заказов</a>
+<a th:href="@{/tickets}">Назад к списку билетов</a>
 </body>
 </html>

@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Добавить магазин</title>
+    <title>Добавить станцию</title>
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<h2>Добавить магазин</h2>
+<h2>Добавить станцию</h2>
 <form th:action="@{/stations/add}" th:object="${station}" method="post">
     <div>
         <label>Название:</label>
@@ -22,6 +22,6 @@
     </div>
     <button type="submit">Сохранить</button>
 </form>
-<a th:href="@{/stations}">Назад к списку магазинов</a>
+<a th:href="@{/stations}">Назад к списку станций</a>
 </body>
 </html>

@@ -2,37 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Список книг</title>
+    <title>Список поездок</title>
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 
 <div th:replace="fragments/header :: main-header"></div>
 
-<h2>Список книг</h2>
+<h2>Список поездок</h2>
 
 <a th:href="@{/}" class="btn">Главная</a>
-<a th:href="@{/trips/add}" class="btn">Добавить книгу</a>
+<a th:href="@{/trips/add}" class="btn">Добавить поездку</a>
 
 <table border="1">
     <thead>
     <tr>
-        <th>Название</th>
-        <th>Автор</th>
-        <th>Категория</th>
+        <th>Название маршрута</th>
+        <th>Проводник</th>
+        <th>Категория (класс поезда)</th>
         <th>Цена</th>
-        <th>На складе</th>
-        <th>Магазины</th>
+        <th>Доступные места</th>
+        <th>Станции</th>
         <th>Действия</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="trip, iterStat : ${trips}">
         <td th:text="${trip.title}"></td>
-        <td th:text="${trip.author}"></td>
+        <td th:text="${trip.conductor}"></td>
         <td th:text="${trip.category}"></td>
         <td th:text="${trip.price}"></td>
-        <td th:text="${trip.stock}"></td>
+        <td th:text="${trip.seatsAvailable}"></td>
         <td>
             <span th:each="station, stStat : ${trip.stations}">
                 <span th:text="${station.name}"></span><span th:if="${!stStat.last}">, </span>

@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Создать заказ</title>
+    <title>Создать билет</title>
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<h2>Создать заказ</h2>
-<form th:action="@{/orders/add}" th:object="${order}" method="post">
+<h2>Создать билет</h2>
+<form th:action="@{/tickets/add}" th:object="${ticket}" method="post">
     <div>
         <label>Пользователь:</label>
         <select th:field="*{user.id}">
@@ -15,7 +15,7 @@
         </select>
     </div>
     <div>
-        <label>Книга:</label>
+        <label>Поездка:</label>
         <select th:field="*{trip.id}">
             <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.title}"></option>
         </select>
@@ -26,6 +26,6 @@
     </div>
     <button type="submit">Создать</button>
 </form>
-<a th:href="@{/orders}">Назад к списку заказов</a>
+<a th:href="@{/tickets}">Назад к списку билетов</a>
 </body>
 </html>
