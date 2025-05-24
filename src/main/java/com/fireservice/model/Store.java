@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "stores")
-public class Store {
+@Table(name = "stations")
+public class Station {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,8 @@ public class Store {
 
     private String phone;
 
-    @ManyToMany(mappedBy = "stores")
-    private Set<Book> books = new HashSet<>();
+    @ManyToMany(mappedBy = "stations")
+    private Set<Trip> trips = new HashSet<>();
 
     // Геттеры и сеттеры
 
@@ -55,11 +55,11 @@ public class Store {
         this.phone = phone;
     }
 
-    public Set<Book> getBooks() {
-        return books;
+    public Set<Trip> getTrips() {
+        return trips;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setTrips(Set<Trip> trips) {
+        this.trips = trips;
     }
 }

@@ -4,29 +4,37 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "tickets")
+public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Пользователь, купивший билет
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // Поездка (маршрут), на которую куплен билет
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    @JoinColumn(name = "trip_id", nullable = false)
+    private Trip trip;
 
     @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
-    private LocalDateTime orderDate = LocalDateTime.now();
+    @Column(name = "purchase_date", nullable = false)
+    private LocalDateTime purchaseDate = LocalDateTime.now();
 
     @Column(nullable = false)
-    private String status = "PENDING";  // PENDING, APPROVED, REJECTED, COMPLETED и т.п.
+    private String status = "PENDING";  // например: PENDING, APPROVED, REJECTED, RETURNED
+
+    // Если нужно, можно добавить transient поле для удобства форматирования даты
+    @Transient
+    private String purchaseDateString;
+
+    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
@@ -44,12 +52,12 @@ public class Order {
         this.user = user;
     }
 
-    public Book getBook() {
-        return book;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public int getQuantity() {
@@ -60,12 +68,12 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public LocalDateTime getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public String getStatus() {
@@ -76,9 +84,11 @@ public class Order {
         this.status = status;
     }
 
-    @Transient
-    private String orderDateString;
+    public String getPurchaseDateString() {
+        return purchaseDateString;
+    }
 
-    public String getOrderDateString() { return orderDateString; }
-    public void setOrderDateString(String s) { this.orderDateString = s; }
+    public void setPurchaseDateString(String purchaseDateString) {
+        this.purchaseDateString = purchaseDateString;
+    }
 }

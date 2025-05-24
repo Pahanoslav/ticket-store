@@ -6,32 +6,32 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "books")
-public class Book {
+@Table(name = "trips")
+public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String title;               // название маршрута
 
-    private String author;
+    private String conductor;           // проводник
 
     private BigDecimal price;
 
-    private String category;
+    private String category;            // класс поезда
 
-    @Column(nullable = false)
-    private int stock;
+    @Column(name = "seats_available", nullable = false)
+    private int seatsAvailable;         // доступные места
 
     @ManyToMany
     @JoinTable(
-            name = "book_store",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "store_id")
+            name = "trip_station",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
     )
-    private Set<Store> stores = new HashSet<>();
+    private Set<Station> stations = new HashSet<>();
 
     // Геттеры и сеттеры
 
@@ -51,12 +51,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getConductor() {
+        return conductor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
     }
 
     public BigDecimal getPrice() {
@@ -75,19 +75,19 @@ public class Book {
         this.category = category;
     }
 
-    public int getStock() {
-        return stock;
+    public int getSeatsAvailable() {
+        return seatsAvailable;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setSeatsAvailable(int seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
     }
 
-    public Set<Store> getStores() {
-        return stores;
+    public Set<Station> getStations() {
+        return stations;
     }
 
-    public void setStores(Set<Store> stores) {
-        this.stores = stores;
+    public void setStations(Set<Station> stations) {
+        this.stations = stations;
     }
 }
