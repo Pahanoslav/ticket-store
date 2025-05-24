@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Добавить магазин</h2>
-<form th:action="@{/stores/add}" th:object="${store}" method="post">
+<form th:action="@{/stations/add}" th:object="${station}" method="post">
     <div>
         <label>Название:</label>
         <input type="text" th:field="*{name}" required />
@@ -22,6 +22,6 @@
     </div>
     <button type="submit">Сохранить</button>
 </form>
-<a th:href="@{/stores}">Назад к списку магазинов</a>
+<a th:href="@{/stations}">Назад к списку магазинов</a>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.fireservice.controller;
 
-import com.fireservice.model.Store;
+import com.fireservice.model.Station;
 import com.fireservice.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,27 +22,27 @@ public class StoreController {
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("store", new Store());
+        model.addAttribute("store", new Station());
         return "stores/add";
     }
 
     @PostMapping("/add")
-    public String addStore(@ModelAttribute Store store) {
-        storeService.saveStore(store);
+    public String addStore(@ModelAttribute Station station) {
+        storeService.saveStore(station);
         return "redirect:/stores";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Store store = storeService.getStoreById(id);
-        model.addAttribute("store", store);
+        Station station = storeService.getStoreById(id);
+        model.addAttribute("store", station);
         return "stores/edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateStore(@PathVariable Long id, @ModelAttribute Store store) {
-        store.setId(id);
-        storeService.saveStore(store);
+    public String updateStore(@PathVariable Long id, @ModelAttribute Station station) {
+        station.setId(id);
+        storeService.saveStore(station);
         return "redirect:/stores";
     }
 

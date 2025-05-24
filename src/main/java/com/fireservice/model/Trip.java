@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "trips")
+@Table(name = "books")
 public class Trip {
 
     @Id
@@ -14,22 +14,22 @@ public class Trip {
     private Long id;
 
     @Column(nullable = false)
-    private String title;               // название маршрута
+    private String title;
 
-    private String conductor;           // проводник
+    private String author;
 
     private BigDecimal price;
 
-    private String category;            // класс поезда
+    private String category;
 
-    @Column(name = "seats_available", nullable = false)
-    private int seatsAvailable;         // доступные места
+    @Column(nullable = false)
+    private int stock;
 
     @ManyToMany
     @JoinTable(
-            name = "trip_station",
-            joinColumns = @JoinColumn(name = "trip_id"),
-            inverseJoinColumns = @JoinColumn(name = "station_id")
+            name = "book_store",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "store_id")
     )
     private Set<Station> stations = new HashSet<>();
 
@@ -51,12 +51,12 @@ public class Trip {
         this.title = title;
     }
 
-    public String getConductor() {
-        return conductor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setConductor(String conductor) {
-        this.conductor = conductor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public BigDecimal getPrice() {
@@ -75,19 +75,19 @@ public class Trip {
         this.category = category;
     }
 
-    public int getSeatsAvailable() {
-        return seatsAvailable;
+    public int getStock() {
+        return stock;
     }
 
-    public void setSeatsAvailable(int seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public Set<Station> getStations() {
+    public Set<Station> getStores() {
         return stations;
     }
 
-    public void setStations(Set<Station> stations) {
+    public void setStores(Set<Station> stations) {
         this.stations = stations;
     }
 }

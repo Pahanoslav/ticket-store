@@ -16,8 +16,8 @@
     </div>
     <div>
         <label>Книга:</label>
-        <select th:field="*{book.id}">
-            <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+        <select th:field="*{trip.id}">
+            <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.title}"></option>
         </select>
     </div>
     <div>

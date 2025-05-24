@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "stations")
+@Table(name = "stores")
 public class Station {
 
     @Id
@@ -18,7 +18,7 @@ public class Station {
 
     private String phone;
 
-    @ManyToMany(mappedBy = "stations")
+    @ManyToMany(mappedBy = "stores")
     private Set<Trip> trips = new HashSet<>();
 
     // Геттеры и сеттеры
@@ -55,11 +55,11 @@ public class Station {
         this.phone = phone;
     }
 
-    public Set<Trip> getTrips() {
+    public Set<Trip> getBooks() {
         return trips;
     }
 
-    public void setTrips(Set<Trip> trips) {
+    public void setBooks(Set<Trip> trips) {
         this.trips = trips;
     }
 }
