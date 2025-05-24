@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Заказы</h2>
-<a th:href="@{/orders/add}">Создать заказ</a>
+<a th:href="@{/templates/tickets/add}">Создать заказ</a>
 <table border="1">
     <thead>
     <tr>
@@ -27,7 +27,7 @@
         <td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
         <td th:text="${order.status}"></td>
         <td>
-            <a th:href="@{|/orders/edit/${order.id}|}">Редактировать</a>
+            <a th:href="@{|/templates/tickets/edit/${order.id}|}">Редактировать</a>
         </td>
     </tr>
     </tbody>
