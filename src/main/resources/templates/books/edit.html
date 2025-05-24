@@ -11,7 +11,7 @@
 
 <h2>Редактировать книгу</h2>
 
-<form th:action="@{|/books/edit/${book.id}|}" th:object="${book}" method="post">
+<form th:action="@{|/trips/edit/${trip.id}|}" th:object="${trip}" method="post">
     <div>
         <label>Название:</label>
         <input type="text" th:field="*{title}" class="input-field" required />
@@ -35,16 +35,16 @@
     <div>
         <label>Магазины:</label>
         <select name="storeIds" multiple="multiple" size="5" class="input-field">
-            <option th:each="store : ${stores}"
-                    th:value="${store.id}"
-                    th:text="${store.name}"
-                    th:selected="${book.stores.contains(store)}">
+            <option th:each="station : ${stations}"
+                    th:value="${station.id}"
+                    th:text="${station.name}"
+                    th:selected="${trip.stations.contains(station)}">
             </option>
         </select>
     </div>
     <button type="submit" class="btn">Сохранить</button>
 </form>
 
-<a th:href="@{/books}">Назад к списку книг</a>
+<a th:href="@{/trips}">Назад к списку книг</a>
 </body>
 </html>

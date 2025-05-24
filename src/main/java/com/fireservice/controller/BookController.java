@@ -1,7 +1,7 @@
 package com.fireservice.controller;
 
-import com.fireservice.model.Book;
-import com.fireservice.model.Store;
+import com.fireservice.model.Station;
+import com.fireservice.model.Trip;
 import com.fireservice.service.BookService;
 import com.fireservice.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,46 +26,46 @@ public class BookController {
     // Список всех книг
     @GetMapping
     public String listBooks(Model model) {
-        List<Book> books = bookService.getAllBooks();
-        model.addAttribute("books", books);
+        List<Trip> trips = bookService.getAllBooks();
+        model.addAttribute("books", trips);
         return "books/list";
     }
 
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
-        model.addAttribute("book", new Book());
+        model.addAttribute("book", new Trip());
         model.addAttribute("stores", storeService.getAllStores());
         return "books/add";
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book, @RequestParam(required = false) List<Long> storeIds) {
+    public String addBook(@ModelAttribute Trip trip, @RequestParam(required = false) List<Long> storeIds) {
         if (storeIds != null) {
-            Set<Store> stores = new HashSet<>(storeService.getStoresByIds(storeIds));
-            book.setStores(stores);
+            Set<Station> stations = new HashSet<>(storeService.getStoresByIds(storeIds));
+            trip.setStores(stations);
         } else {
-            book.setStores(new HashSet<>());
+            trip.setStores(new HashSet<>());
         }
-        bookService.saveBook(book);
+        bookService.saveBook(trip);
         return "redirect:/books";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Book book = bookService.getBookById(id);
-        model.addAttribute("book", book);
+        Trip trip = bookService.getBookById(id);
+        model.addAttribute("book", trip);
         model.addAttribute("stores", storeService.getAllStores()); // список магазинов для выбора
         return "books/edit"; // имя шаблона Thymeleaf для редактирования
     }
 
     @PostMapping("/edit/{id}")
-    public String updateBook(@PathVariable Long id, @ModelAttribute Book book, @RequestParam(required = false) List<Long> storeIds) {
-        book.setId(id);
+    public String updateBook(@PathVariable Long id, @ModelAttribute Trip trip, @RequestParam(required = false) List<Long> storeIds) {
+        trip.setId(id);
         if (storeIds != null) {
-            Set<Store> stores = new HashSet<>(storeService.getStoresByIds(storeIds));
-            book.setStores(stores);
+            Set<Station> stations = new HashSet<>(storeService.getStoresByIds(storeIds));
+            trip.setStores(stations);
         }
-        bookService.saveBook(book);
+        bookService.saveBook(trip);
         return "redirect:/books";
     }
 }

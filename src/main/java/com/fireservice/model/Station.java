@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "stores")
-public class Store {
+public class Station {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Store {
     private String phone;
 
     @ManyToMany(mappedBy = "stores")
-    private Set<Book> books = new HashSet<>();
+    private Set<Trip> trips = new HashSet<>();
 
     // Геттеры и сеттеры
 
@@ -55,11 +55,11 @@ public class Store {
         this.phone = phone;
     }
 
-    public Set<Book> getBooks() {
-        return books;
+    public Set<Trip> getBooks() {
+        return trips;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setBooks(Set<Trip> trips) {
+        this.trips = trips;
     }
 }

@@ -17,7 +17,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    private Trip trip;
 
     @Column(nullable = false)
     private int quantity;
@@ -44,12 +44,12 @@ public class Order {
         this.user = user;
     }
 
-    public Book getBook() {
-        return book;
+    public Trip getBook() {
+        return trip;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBook(Trip trip) {
+        this.trip = trip;
     }
 
     public int getQuantity() {

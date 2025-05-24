@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "store_id")
     )
-    private Set<Store> stores = new HashSet<>();
+    private Set<Station> stations = new HashSet<>();
 
     // Геттеры и сеттеры
 
@@ -83,11 +83,11 @@ public class Book {
         this.stock = stock;
     }
 
-    public Set<Store> getStores() {
-        return stores;
+    public Set<Station> getStores() {
+        return stations;
     }
 
-    public void setStores(Set<Store> stores) {
-        this.stores = stores;
+    public void setStores(Set<Station> stations) {
+        this.stations = stations;
     }
 }

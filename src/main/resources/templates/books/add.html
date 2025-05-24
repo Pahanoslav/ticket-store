@@ -11,7 +11,7 @@
 
 <h2>Добавить книгу</h2>
 
-<form th:action="@{/books/add}" th:object="${book}" method="post">
+<form th:action="@{/trips/add}" th:object="${trip}" method="post">
     <div>
         <label>Название:</label>
         <input type="text" th:field="*{title}" required />
@@ -35,15 +35,15 @@
     <div>
         <label>Магазины:</label>
         <select name="storeIds" multiple="multiple" size="5">
-            <option th:each="store : ${stores}"
-                    th:value="${store.id}"
-                    th:text="${store.name}">
+            <option th:each="station : ${stations}"
+                    th:value="${station.id}"
+                    th:text="${station.name}">
             </option>
         </select>
     </div>
     <button type="submit">Сохранить</button>
 </form>
 
-<a th:href="@{/books}">Назад к списку книг</a>
+<a th:href="@{/trips}">Назад к списку книг</a>
 </body>
 </html>

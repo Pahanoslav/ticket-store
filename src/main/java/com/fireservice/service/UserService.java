@@ -1,6 +1,5 @@
 package com.fireservice.service;
 
-import com.fireservice.model.Book;
 import com.fireservice.model.User;
 import com.fireservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
