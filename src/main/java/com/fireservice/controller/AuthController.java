@@ -33,6 +33,7 @@ public class AuthController {
     // Обработка отправки формы регистрации
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
+        System.out.println("ROLE IS: " + user.getRole());
         userService.registerUser(user);
         return "redirect:/login";
     }

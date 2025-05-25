@@ -17,16 +17,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Находим пользователя в базе данных
-        User user = userRepository.findByUsername(username).get();
-        if (user == null) {
-            throw new UsernameNotFoundException("Пользователь не найден: " + username);
-        }
-
-        // Возвращаем UserDetails, который Spring Security использует для аутентификации
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                AuthorityUtils.NO_AUTHORITIES);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден: " + username));
+        return new CustomUserDetails(user);
     }
 }

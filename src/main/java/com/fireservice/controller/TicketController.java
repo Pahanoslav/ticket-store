@@ -1,10 +1,14 @@
 package com.fireservice.controller;
 
 import com.fireservice.model.Ticket;
+import com.fireservice.model.User;
+import com.fireservice.service.CustomUserDetails;
 import com.fireservice.service.TicketService;
 import com.fireservice.service.TripService;
 import com.fireservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,12 +41,33 @@ public class TicketController {
         return "tickets/list";  // Thymeleaf шаблон tickets/list.html
     }
 
+//    @GetMapping("/add")
+//    public String showAddForm(Model model) {
+//        model.addAttribute("ticket", new Ticket());
+//        model.addAttribute("trips", tripService.getAllTrips());
+//        model.addAttribute("users", userService.getAllUsers());
+//        return "tickets/add";
+//    }
+
     @GetMapping("/add")
-    public String showAddForm(Model model) {
+    public String showAddForm(Model model, Authentication authentication) {
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("trips", tripService.getAllTrips());
-        model.addAttribute("users", userService.getAllUsers());
-        return "tickets/add";
+
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        List<User> users;
+        if (isAdmin) {
+            users = userService.getAllUsers();  // все пользователи для админа
+        } else {
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+            User currentUser = customUserDetails.getUser();
+            users = List.of(currentUser);  // только текущий пользователь для обычного юзера
+        }
+        model.addAttribute("users", users);
+
+        return "orders/add";
     }
 
     @PostMapping("/add")
