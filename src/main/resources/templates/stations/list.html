@@ -8,14 +8,14 @@
 <body>
 <h2>Станции</h2>
 <a th:href="@{/home}" class="btn">Главная</a>
-<a th:href="@{/stations/add}" class="btn">Добавить станцию</a>
+<a th:href="@{/stations/add}" class="btn" sec:authorize="hasRole('ADMIN')">Добавить станцию</a>
 <table border="1">
     <thead>
     <tr>
         <th>Название</th>
         <th>Адрес</th>
         <th>Телефон</th>
-        <th>Действия</th>
+        <th sec:authorize="hasRole('ADMIN')">Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td th:text="${station.address}"></td>
         <td th:text="${station.phone}"></td>
         <td>
-            <a th:href="@{|/stations/edit/${station.id}|}">Редактировать</a>
+            <a th:href="@{|/stations/edit/${station.id}|}" sec:authorize="hasRole('ADMIN')">Редактировать</a>
         </td>
     </tr>
     </tbody>

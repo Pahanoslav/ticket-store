@@ -7,12 +7,10 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: main-header"></div>
-
 <h2>Список поездок</h2>
 
 <a th:href="@{/}" class="btn">Главная</a>
-<a th:href="@{/trips/add}" class="btn">Добавить поездку</a>
+<a th:href="@{/trips/add}" class="btn" sec:authorize="hasRole('ADMIN')">Добавить поездку</a>
 
 <table border="1">
     <thead>
@@ -23,7 +21,7 @@
         <th>Цена</th>
         <th>Доступные места</th>
         <th>Станции</th>
-        <th>Действия</th>
+        <th sec:authorize="hasRole('ADMIN')">Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -39,7 +37,7 @@
             </span>
         </td>
         <td>
-            <a th:href="@{|/trips/edit/${trip.id}|}">Редактировать</a>
+            <a th:href="@{|/trips/edit/${trip.id}|}" sec:authorize="hasRole('ADMIN')">Редактировать</a>
         </td>
     </tr>
     </tbody>
