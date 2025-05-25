@@ -24,6 +24,11 @@
         <label>Количество:</label>
         <input type="number" th:field="*{quantity}" min="1" class="input-field" required />
     </div>
+
+    <div th:if="${error}" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+
     <button type="submit">Создать</button>
 </form>
 <a th:href="@{/tickets}">Назад к списку билетов</a>

@@ -1,6 +1,7 @@
 package com.fireservice.controller;
 
 import com.fireservice.model.Ticket;
+import com.fireservice.model.Trip;
 import com.fireservice.model.User;
 import com.fireservice.service.CustomUserDetails;
 import com.fireservice.service.TicketService;
@@ -71,8 +72,27 @@ public class TicketController {
     }
 
     @PostMapping("/add")
-    public String addTicket(@ModelAttribute Ticket ticket) {
+    public String addTicket(@ModelAttribute Ticket ticket, Model model) {
+        Trip trip = tripService.getTripById(ticket.getTrip().getId());
+        int seatsLeft = trip.getSeatsAvailable();
+        int quantity = ticket.getQuantity();
+
+        if (quantity > seatsLeft) {
+            model.addAttribute("error", "Недостаточно доступных мест для выбранного рейса");
+            model.addAttribute("ticket", ticket);
+            model.addAttribute("trips", tripService.getAllTrips());
+
+            // Можно добавить пользователей, если в форме нужен выбор
+            // model.addAttribute("users", userService.getAllUsers());
+
+            return "tickets/add"; // возвращаем форму с ошибкой
+        }
+
+        trip.setSeatsAvailable(seatsLeft - quantity);
+        tripService.saveTrip(trip);
+
         ticketService.saveTicket(ticket);
+
         return "redirect:/tickets";
     }
 
