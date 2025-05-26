@@ -31,15 +31,28 @@ public class TicketController {
     private UserService userService;
 
     @GetMapping
-    public String getAllTickets(Model model) {
-        List<Ticket> tickets = ticketService.getAllTickets();
+    public String getAllTickets(Model model, Authentication authentication) {
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        List<Ticket> tickets;
+
+        if (isAdmin) {
+            tickets = ticketService.getAllTickets();  // все билеты для админа
+        } else {
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+            User currentUser = customUserDetails.getUser();
+            tickets = ticketService.getTicketsByUserId(currentUser.getId());  // билеты только текущего пользователя
+        }
+
         tickets.forEach(t -> {
             if (t.getPurchaseDate() != null) {
                 t.setPurchaseDateString(t.getPurchaseDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
             }
         });
+
         model.addAttribute("tickets", tickets);
-        return "tickets/list";  // Thymeleaf шаблон tickets/list.html
+        return "tickets/list";
     }
 
 //    @GetMapping("/add")
@@ -60,8 +73,10 @@ public class TicketController {
 
         List<User> users;
         if (isAdmin) {
+            System.out.println("ISADMIN IS: " + isAdmin);
             users = userService.getAllUsers();  // все пользователи для админа
         } else {
+            System.out.println("ISADMIN IS: " + isAdmin);
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             User currentUser = customUserDetails.getUser();
             users = List.of(currentUser);  // только текущий пользователь для обычного юзера

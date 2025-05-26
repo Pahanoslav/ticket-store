@@ -16,7 +16,7 @@ public class TicketService {
     public List<Ticket> getAllTickets() {
         List<Ticket> tickets = ticketRepository.findAll();
         System.out.println("Tickets count: " + tickets.size());
-        for (Ticket ticket : tickets) {
+        tickets.forEach(ticket -> {
             System.out.println("Ticket ID: " + ticket.getId());
             if (ticket.getUser() != null) {
                 System.out.println("  User ID: " + ticket.getUser().getId() + ", username: " + ticket.getUser().getUsername());
@@ -31,8 +31,12 @@ public class TicketService {
             System.out.println("  Quantity: " + ticket.getQuantity());
             System.out.println("  Status: " + ticket.getStatus());
             System.out.println("  Purchase Date: " + ticket.getPurchaseDate());
-        }
+        });
         return tickets;
+    }
+
+    public List<Ticket> getTicketsByUserId(Long userId) {
+        return ticketRepository.findByUserId(userId);
     }
 
     public Ticket getTicketById(Long id) {
@@ -46,6 +50,4 @@ public class TicketService {
     public void deleteTicket(Long id) {
         ticketRepository.deleteById(id);
     }
-
-    // Добавляй бизнес-логику для изменения статуса билета, подсчёта и т.п.
 }
